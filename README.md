@@ -42,9 +42,7 @@ I started with building the skeleton of the app with JSX only, I then used CSS f
 
 - JSX
 - CSS custom properties
-- Mobile-first workflow
 - ReactJS
-- Designed using inVisionStudio
 
 ## Author
 - LinkedIn - [@shreyashvidhate](https://www.linkedin.com/in/shreyashvidhate)
