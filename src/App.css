@@ -1,0 +1,527 @@
+*, *::before, *::after{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  transition: all .2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+}
+
+@font-face {
+  font-family: clashDisplay;
+  src: url("./assets/ClashDisplay-Regular.otf");
+}
+
+@font-face {
+  font-family: clashDisplayMedium;
+  src: url("./assets/ClashDisplay-Medium.otf");
+}
+
+html{
+  font-size: 62.5%;
+  font-family: clashDisplay;
+}
+
+:root{
+  --normalBlue: hsl(210, 77%, 39%);
+  --darkBlue: hsl(210, 77%, 19%);
+  --lightBlue: hsl(210, 77%, 69%);
+  --lightRed: hsl(0, 100%, 60%);
+  --darkRed: hsl(0, 70%, 40%);
+  --white: hsl(0, 0%, 100%);
+  --black:hsl(0, 0%, 0%);
+  --grey: hsla(0, 0%, 70%, 0.767);
+  --lineDark: rgba(0, 0, 0, 0.479);
+  --lineLight :hsla(0, 0%, 40%, 0.479);
+
+  --whiteDelete: #fff;
+  --blackDelete: #000;
+
+  --lightBorderBottom:hsla(0, 0%, 10%, 0.26);
+  --lightBorderShadow:rgba(128, 128, 128, 0.144);
+
+
+  --darkBorderBottom: hsla(0, 0%, 70%, 0.26);
+  --darkBorderShadow:rgba(128, 128, 128, 0);
+
+  --normalBlueButton: hsl(210, 77%, 39%);
+
+  --whiteInput: #fff;
+  --transparentInput: rgba(255, 255, 255, 0);
+  
+  --lightShadow: hsla(210, 77%, 69%, 0.632);
+  --darkShadow: hsla(210, 77%, 69%, 0.232);
+
+  --lightGradient: var(--lightBlue) ,var(--normalBlue);
+  --darkGradient: hsl(210, 77%, 59%), hsl(210, 77%, 29%);
+}
+
+::selection{
+  background-color: var(--normalBlue);
+  color: var(--white);
+}
+
+/* styling for the main app empty state*/
+main{
+  background-color: var(--white);
+  min-height: 100vh;
+  padding: .01rem 0 4rem;
+}
+
+header{
+  width: 100%;
+  border-bottom: 2px solid var(--lightBorderBottom);
+  box-shadow: 0 1px 2px 2px var(--lightBorderShadow);
+  padding: 2rem 0rem;
+  position: fixed;
+  background-color: var(--white);
+}
+
+header .header-inner{
+  max-width: 90vw;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.options img{
+  margin: 0 1.5rem 0 0;
+}
+
+.header-inner a{
+  color: var(--normalBlue);
+  font-size: 2rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+h1.heading{
+  color: var(--normalBlue);
+  margin: 10rem auto 2rem auto;
+  max-width: fit-content;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+main p.empty-remindrs{
+  color: var(--normalBlue);
+  font-size: 1.4rem;
+  max-width: 90vw;
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 100;
+  margin:10rem auto 10rem;
+}
+
+main button.add-remindrs{
+  background-color: var(--normalBlueButton);
+  border: none;
+  padding: 1rem;
+  color: white;
+  font-size: 1.4rem;
+  border-radius: .5rem;
+  -webkit-border-radius: .5rem;
+  -moz-border-radius: .5rem;
+  -ms-border-radius: .5rem;
+  -o-border-radius: .5rem;
+  margin: auto;
+  display: block;
+  font-family: clashDisplay;
+  letter-spacing: 1px;
+}
+
+/* styling for the add popup */
+main .overlay{
+  width: 100vw;
+  height:100vh;
+  background-color: hsla(0, 0%, 0%, 0.801);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+.overlay .add-remindr-popup,
+.overlay .delete-remindr-popup
+{
+  background-color: var(--white);
+  width: 90vw;
+  max-width: 35rem;
+  margin: auto;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.11);
+  border-radius: 1.4rem;
+  -webkit-border-radius: 1.4rem;
+  -moz-border-radius: 1.4rem;
+  -ms-border-radius: 1.4rem;
+  -o-border-radius: 1.4rem;
+  padding: 2rem;
+}
+
+.add-remindr-popup h2,
+.delete-remindr-popup h2
+{
+  max-width: fit-content;
+  font-size: 2rem;
+  margin:0 auto 2rem;
+  letter-spacing: 1px;
+  color: var(--black);
+}
+
+.add-remindr-popup .title {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 2.5rem 0;
+}
+
+.title label,
+.interval label,
+.vibrate label,
+.overview p
+{
+  font-size: 1.4rem;
+  margin: 0 .5rem .5rem 0;
+  letter-spacing: .5px;
+  color: var(--black);
+}
+
+.title input{
+  max-width: 28rem;
+  padding: 1rem;
+  border: 1px solid var(--grey);
+  border-radius: .3rem;
+  -webkit-border-radius: .3rem;
+  -moz-border-radius: .3rem;
+  -ms-border-radius: .3rem;
+  -o-border-radius: .3rem;
+  background-color: white;
+}
+
+.title input:focus{
+  background-color: rgb(255, 255, 255);
+}
+
+::placeholder{
+  font-family: clashDisplay;
+  color: hsl(0, 0%, 0%);
+  opacity: .4;
+}
+
+.add-remindr-popup .interval{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 0 0 2.5rem 0;
+}
+
+.interval .time-selection{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 29rem;
+  flex-wrap: wrap;
+}
+
+.time-selection p{
+  font-size: 1.4rem;
+  margin: 0 .5rem .5rem 0;
+  letter-spacing: .5px;
+  color: var(--black);
+}
+
+.time-selection select{
+  border: none;
+  margin: 0 1.5rem 0 0;
+  padding: .5rem 1rem;
+  border-radius: .4rem;
+  -webkit-border-radius: .4rem;
+  -moz-border-radius: .4rem;
+  -ms-border-radius: .4rem;
+  -o-border-radius: .4rem;
+  width: 6.5rem;
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+.add-remindr-popup .vibrate{
+  margin: 0 0 2.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 7rem;
+}
+
+.vibrate label{
+  margin: 0;
+}
+
+.add-remindr-popup .overview{
+  margin: 0 0 2.5rem 0;
+}
+
+.overview .output{
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: var(--black);
+  opacity: .6;
+}
+
+.add-remindr-popup .bottom-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottom-buttons button{
+  border:none;
+  background-color:transparent;
+  padding: 1rem;
+  width: 50%;
+  font-family: clashDisplayMedium;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+}
+
+.bottom-buttons .create
+{
+  color: var(--normalBlue);
+  width: 70%;
+  text-align: left;
+}
+
+.bottom-buttons .cancel,
+.buttons .delete
+{
+  color:var(--darkRed);
+  position: relative;
+}
+
+.bottom-buttons .cancel::before{
+  content: "";
+  width: 1px;
+  height: 70%;
+  background-color: var(--lineDark);
+  position: absolute;
+  top:.7rem;
+  left:0rem;
+}
+
+/* styling for the remindrs themselves*/
+main .remindrs-container{
+  margin: 0 0 4rem 0;
+}
+
+main .single-remindr{
+  width: 90vw;
+  max-width: 60rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-image:linear-gradient(to left, var(--lightGradient));
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  box-shadow: 0 4px 12px var(--lightShadow);
+  color: white;
+}
+
+.single-remindr p.remindr-title{
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  font-weight: 100;
+  font-family: clashDisplayMedium;
+  margin:0 0 .5rem;
+}
+
+.single-remindr p.remindr-title::first-letter{
+  text-transform: capitalize;
+}
+
+.single-remindr .time{
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin: 0 0 2rem 0;
+}
+
+.single-remindr .bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0 0;
+}
+
+.bottom img{
+  max-width: 2.2rem;
+}
+
+.bottom .date-created{
+  display: flex;
+  align-items: center;
+}
+
+.date-created img{
+  margin: 0 .4rem 0 0;
+  max-width: 1.5rem;
+}
+
+.date-created small{
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.edit-and-delete img:not(:last-of-type){
+  margin: 0 .8rem 0 0;
+}
+
+.edit-and-delete img{
+  max-width: 3rem;
+}
+
+/* styling for the delete reminder popup  */
+.delete-remindr-popup h2{
+  color: var(--blackDelete);
+}
+
+.delete-remindr-popup p{
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  align-items: center;
+  text-align: center;
+  margin: 0 0 2rem 0;
+  color: var(--blackDelete);
+}
+
+.buttons button{
+  border:none;
+  background-color:transparent;
+  padding: 1rem;
+  width: 50%;
+  font-family: clashDisplayMedium;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+}
+
+.buttons .leave{
+  color: var(--normalBlue);
+  position: relative;
+}
+
+.buttons .leave::before{
+  content: "";
+  width: 1px;
+  height: 70%;
+  background-color: rgba(0, 0, 0, 0.479);
+  position: absolute;
+  top:.7rem;
+  left:0rem;
+}
+
+@media screen and (min-width:600px) {
+  h1.heading{
+    font-size: 2.5rem;
+  }
+
+  main p.empty-remindrs{
+    color: var(--normalBlue);
+    font-size: 1.6rem;
+    max-width: 90vw;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 100;
+    margin:15rem auto 15rem;
+  }
+
+  .bottom-buttons button{
+    border:none;
+    background-color:transparent;
+    padding: 1rem;
+    width: 50%;
+    font-family: clashDisplayMedium;
+    letter-spacing: 1px;
+    font-size: 1.4rem;
+  }
+
+  .buttons button{
+    border:none;
+    background-color:transparent;
+    padding: 1rem;
+    width: 50%;
+    font-family: clashDisplayMedium;
+    letter-spacing: 1px;
+    font-size: 1.4rem;
+  }
+
+  .bottom img:not(.date-created img){
+    max-width: 3rem;
+    margin: 0 0 0 1rem;
+  }
+  
+}
+
+@media screen and (min-width:900px) {
+    .bottom img{
+    max-width: 4rem;
+  }
+
+  .date-created small{
+    font-size: 1.2rem;
+    margin: 0 0 0 .5rem;
+  }
+}
+
+@media screen and (min-width:1500px) {
+  main .remindrs-container{
+    max-width: 90vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: auto;
+  }
+
+  main .single-remindr{
+    max-width: 55rem;
+  }
+}
+
+/* hover states */
+.options img:hover,
+.options svg:hover,
+.edit-and-delete img:hover
+{
+  cursor: pointer;
+  animation: shake ease-in-out;
+  -webkit-animation: shake ease-in-out;
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+
+.edit-and-delete img:hover
+{
+  background-color: hsla(210, 77%, 69%, 0.034);
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+.bottom-buttons button:hover,
+.buttons button:hover
+{
+  background-color: rgba(0, 0, 0, 0.048);
+}
+
+main button.add-remindrs:hover{
+  box-shadow: 0 .2rem 1rem .2rem hsla(210, 77%, 39%, 0.199);
+  }
+
+main button.add-remindrs:active{
+  background-color: var(--darkBlue);
+}
